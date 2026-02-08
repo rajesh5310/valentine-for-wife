@@ -12,8 +12,6 @@
       --text: #3a1a2d;
       --yes: #ff4d6d;
       --yes-hover: #e6395b;
-      --no: #ff8fab;
-      --no-hover: #ff758f;
     }
 
     * { box-sizing: border-box; }
@@ -62,18 +60,14 @@
 
     button:active { transform: scale(0.96); }
 
-    #yesBtn {
+    #yesBtn,
+    #noBtn {
       background: var(--yes);
       color: #fff;
     }
 
-    #yesBtn:hover { background: var(--yes-hover); }
-
-    #noBtn {
-      background: var(--no);
-      color: #fff;
-    }
-    #noBtn:hover { background: var(--no-hover); }
+    #yesBtn:hover,
+    #noBtn:hover { background: var(--yes-hover); }
 
     .gif-wrap {
       margin-top: 1.5rem;
