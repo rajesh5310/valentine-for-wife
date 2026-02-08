@@ -49,12 +49,15 @@
     }
 
     button {
+      -webkit-appearance: none;
+      appearance: none;
       border: 0;
       padding: 0.8rem 1.4rem;
       border-radius: 999px;
       font-size: 1rem;
       font-weight: 700;
       cursor: pointer;
+      opacity: 1;
       transition: transform 0.15s ease, background-color 0.2s ease;
     }
 
@@ -68,6 +71,14 @@
 
     #yesBtn:hover,
     #noBtn:hover { background: var(--yes-hover); }
+
+    #yesBtn:disabled,
+    #noBtn:disabled {
+      background: var(--yes);
+      color: #fff;
+      opacity: 1;
+      cursor: pointer;
+    }
 
     .gif-wrap {
       margin-top: 1.5rem;
