@@ -157,19 +157,73 @@
       margin-top: 1.35rem;
       display: none;
       animation: pop 0.5s ease;
+      position: relative;
+      z-index: 2;
     }
 
     .response-wrap.show { display: block; }
 
     .msg {
       max-width: 620px;
-      margin: 0.2rem auto 0;
-      font-family: "Cinzel", "Times New Roman", serif;
-      font-size: clamp(1.3rem, 3.7vw, 1.9rem);
+      margin: 0.2rem auto 0.3rem;
+      font-family: "Cormorant Garamond", Georgia, serif;
+      font-size: clamp(1.25rem, 3.7vw, 1.9rem);
       line-height: 1.45;
-      letter-spacing: 0.06em;
+      letter-spacing: 0.01em;
       font-weight: 600;
       color: #6f3550;
+      text-transform: none;
+    }
+
+    .royal-burst {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .royal-burst span {
+      position: absolute;
+      bottom: -2.2rem;
+      left: var(--x);
+      font-size: var(--size, 1.35rem);
+      opacity: 0;
+      transform: translateY(0) scale(0.6) rotate(0deg);
+    }
+
+    .card.yes-mode .royal-burst span {
+      animation: royal-rise 2.3s ease-out var(--d, 0s) forwards;
+    }
+
+    .card.yes-mode {
+      animation: royal-glow 0.9s ease;
+    }
+
+    @keyframes royal-rise {
+      0% {
+        opacity: 0;
+        transform: translateY(0) scale(0.55) rotate(0deg);
+      }
+      18% {
+        opacity: 1;
+      }
+      100% {
+        opacity: 0;
+        transform: translateY(-220px) scale(1.2) rotate(28deg);
+      }
+    }
+
+    @keyframes royal-glow {
+      0% {
+        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+      }
+      50% {
+        box-shadow: 0 16px 38px rgba(107, 54, 92, 0.34), 0 0 0 2px rgba(183, 145, 70, 0.32);
+      }
+      100% {
+        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+      }
     }
 
     @keyframes pop {
@@ -185,6 +239,19 @@
 </head>
 <body>
   <main class="card">
+    <div class="royal-burst" id="royalBurst" aria-hidden="true">
+      <span style="--x:6%; --d:0s; --size:1.45rem;">👑</span>
+      <span style="--x:15%; --d:0.1s; --size:1.3rem;">🌹</span>
+      <span style="--x:24%; --d:0.25s; --size:1.15rem;">✨</span>
+      <span style="--x:34%; --d:0.4s; --size:1.35rem;">❦</span>
+      <span style="--x:44%; --d:0.2s; --size:1.4rem;">🌹</span>
+      <span style="--x:55%; --d:0.55s; --size:1.2rem;">✨</span>
+      <span style="--x:66%; --d:0.3s; --size:1.45rem;">👑</span>
+      <span style="--x:76%; --d:0.48s; --size:1.25rem;">💐</span>
+      <span style="--x:86%; --d:0.15s; --size:1.3rem;">✨</span>
+      <span style="--x:94%; --d:0.62s; --size:1.25rem;">🌹</span>
+    </div>
+
     <div id="promptWrap">
       <p class="crest">The House of Golani</p>
       <h1>Will You Be My Valentine?</h1>
@@ -202,11 +269,13 @@
   </main>
 
   <script>
+    const card = document.querySelector('.card');
     const yesBtn = document.getElementById('yesBtn');
     const promptWrap = document.getElementById('promptWrap');
     const responseWrap = document.getElementById('responseWrap');
 
     yesBtn.addEventListener('click', () => {
+      card.classList.add('yes-mode');
       promptWrap.style.display = 'none';
       responseWrap.classList.add('show');
     });
