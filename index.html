@@ -153,85 +153,22 @@
       cursor: pointer;
     }
 
-    .gif-wrap {
+    .response-wrap {
       margin-top: 1.35rem;
       display: none;
       animation: pop 0.5s ease;
     }
 
-    .gif-wrap.show { display: block; }
-
-    .royal-portrait {
-      position: relative;
-      width: min(390px, 100%);
-      margin: 0 auto;
-      padding: 15px;
-      border-radius: 24px;
-      background:
-        linear-gradient(140deg, #f4dfb2 0%, #cfa25c 34%, #f5dfb8 68%, #b38842 100%);
-      box-shadow:
-        inset 0 0 0 1px rgba(80, 45, 16, 0.45),
-        0 10px 24px rgba(46, 23, 45, 0.28);
-    }
-
-    .royal-portrait::before {
-      content: "";
-      position: absolute;
-      inset: 8px;
-      border-radius: 16px;
-      border: 2px solid rgba(123, 78, 23, 0.46);
-      pointer-events: none;
-    }
-
-    .royal-portrait::after {
-      content: "👑";
-      position: absolute;
-      top: -15px;
-      left: 50%;
-      transform: translateX(-50%);
-      font-size: 1.6rem;
-      filter: drop-shadow(0 2px 1px rgba(0, 0, 0, 0.25));
-    }
-
-    .royal-portrait img {
-      display: block;
-      width: 100%;
-      border-radius: 12px;
-      border: 3px solid #fff7e8;
-      box-shadow: inset 0 0 0 1px rgba(120, 77, 22, 0.25);
-      filter: saturate(1.1) contrast(1.05);
-    }
-
-    .sparkles {
-      position: absolute;
-      inset: 10px;
-      pointer-events: none;
-    }
-
-    .sparkles span {
-      position: absolute;
-      font-size: 1rem;
-      color: #ffefbf;
-      text-shadow: 0 0 8px rgba(255, 239, 191, 0.9);
-      animation: twinkle 2.4s ease-in-out infinite;
-    }
-
-    .sparkles span:nth-child(1) { top: 8%; left: 6%; animation-delay: 0s; }
-    .sparkles span:nth-child(2) { top: 12%; right: 7%; animation-delay: 0.6s; }
-    .sparkles span:nth-child(3) { bottom: 10%; left: 11%; animation-delay: 1.2s; }
-    .sparkles span:nth-child(4) { bottom: 7%; right: 10%; animation-delay: 1.8s; }
-    .sparkles span:nth-child(5) { top: 50%; right: 4%; animation-delay: 2.1s; }
-
-    @keyframes twinkle {
-      0%, 100% { opacity: 0.3; transform: scale(0.8); }
-      45% { opacity: 1; transform: scale(1.15); }
-    }
+    .response-wrap.show { display: block; }
 
     .msg {
-      margin: 0.25rem 0 0.85rem;
+      max-width: 620px;
+      margin: 0.2rem auto 0;
       font-family: "Cinzel", "Times New Roman", serif;
+      font-size: clamp(1.3rem, 3.7vw, 1.9rem);
+      line-height: 1.45;
       letter-spacing: 0.06em;
-      font-weight: 700;
+      font-weight: 600;
       color: #6f3550;
     }
 
@@ -248,39 +185,30 @@
 </head>
 <body>
   <main class="card">
-    <p class="crest">The House of Shayoni</p>
-    <h1>Will You Be My Valentine?</h1>
-    <p class="question">My beloved Shayoni, jewel of my heart and wife most irresistible, might I dare ask if you would grant me the honour of being my Valentine?</p>
-    <p class="divider" aria-hidden="true">❦</p>
-    <div class="buttons">
-      <button class="choice-btn" id="yesBtn" type="button">Yes</button>
-      <button class="choice-btn" id="noBtn" type="button">No</button>
+    <div id="promptWrap">
+      <p class="crest">The House of Golani</p>
+      <h1>Will You Be My Valentine?</h1>
+      <p class="question">My beloved Shayoni, jewel of my heart and wife most irresistible, might I dare ask if you would grant me the honour of being my Valentine?</p>
+      <p class="divider" aria-hidden="true">❦</p>
+      <div class="buttons">
+        <button class="choice-btn" id="yesBtn" type="button">Yes</button>
+        <button class="choice-btn" id="noBtn" type="button">No</button>
+      </div>
     </div>
 
-    <section id="gifWrap" class="gif-wrap" aria-live="polite">
-      <p class="msg">Her Majesty's Favourite Companion</p>
-      <div class="royal-portrait">
-        <img
-          src="https://media.giphy.com/media/l4FGI8GoTL7N4DsyI/giphy.gif"
-          alt="Royal dog with roses gif"
-        />
-        <div class="sparkles" aria-hidden="true">
-          <span>✦</span>
-          <span>✦</span>
-          <span>✦</span>
-          <span>✦</span>
-          <span>✦</span>
-        </div>
-      </div>
+    <section id="responseWrap" class="response-wrap" aria-live="polite">
+      <p class="msg">Then I am undone in the most exquisite manner, my dearest Shayoni.<br>You have made me the happiest of husbands this Valentine's Week.</p>
     </section>
   </main>
 
   <script>
     const yesBtn = document.getElementById('yesBtn');
-    const gifWrap = document.getElementById('gifWrap');
+    const promptWrap = document.getElementById('promptWrap');
+    const responseWrap = document.getElementById('responseWrap');
 
     yesBtn.addEventListener('click', () => {
-      gifWrap.classList.add('show');
+      promptWrap.style.display = 'none';
+      responseWrap.classList.add('show');
     });
 
     // Intentionally no behavior for the No button.
